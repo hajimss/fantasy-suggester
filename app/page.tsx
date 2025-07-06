@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,7 +13,14 @@ export default function Home() {
   }
 
   if (!isSignedIn) {
-    return <div>Sign in to view this page</div>;
+    return (
+      <div className="flex flex-col justify-center items-start">
+        <p>Welcome! Please sign in to get good at FPL.</p>
+        <div className="border-2 p-2">
+          <SignInButton />
+        </div>
+      </div>
+    );
   }
 
   const handleTeamIdSubmit = (event: React.FormEvent<HTMLFormElement>) => {
