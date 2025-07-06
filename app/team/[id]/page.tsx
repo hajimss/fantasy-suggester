@@ -1,6 +1,5 @@
 import Player from "@/components/player";
 import Team from "@/components/team";
-import { Key } from "react";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -20,7 +19,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="flex flex-col gap-2 justify-center items-center">
         {picks.map(
           (pick: {
-            element: Key | null | undefined;
+            element: string;
             is_captain: boolean;
             element_type: number;
             position: number;
@@ -28,7 +27,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             <Player
               key={pick.element}
               params={{
-                playerId: pick.element?.toString() ?? "",
+                playerId: pick.element,
                 captain: pick.is_captain,
                 element_type: pick.element_type,
                 position: pick.position,
