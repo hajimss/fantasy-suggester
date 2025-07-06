@@ -4,14 +4,14 @@ import { Card, CardContent } from "./ui/card";
 const Player = async ({
   params,
 }: {
-  params: {
+  params: Promise<{
     playerId: string;
     captain: boolean;
     element_type: number;
     position: number;
-  };
+  }>;
 }) => {
-  const { playerId, captain, element_type, position } = params;
+  const { playerId, captain, element_type, position } = await params;
   const FPL_URL = process.env.FPL_URL;
 
   const res = await fetch(`${FPL_URL}/bootstrap-static/`);

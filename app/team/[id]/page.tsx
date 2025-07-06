@@ -2,8 +2,8 @@ import Player from "@/components/player";
 import Team from "@/components/team";
 import { Key } from "react";
 
-const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
   const FPL_URL = process.env.FPL_URL;
   const GW = 38; // TODO: Replace with dynamic logic
 
