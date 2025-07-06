@@ -1,5 +1,6 @@
 import Player from "@/components/player";
 import Team from "@/components/team";
+import { Key } from "react";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -17,17 +18,24 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <Team params={{ teamId: id }} />
       <p>Your team:</p>
       <div className="flex flex-col gap-2 justify-center items-center">
-        {picks.map((pick: any) => (
-          <Player
-            key={pick.element}
-            params={{
-              playerId: pick.element.toString(),
-              captain: pick.is_captain,
-              element_type: pick.element_type,
-              position: pick.position,
-            }}
-          />
-        ))}
+        {picks.map(
+          (pick: {
+            element: Key | null | undefined;
+            is_captain: boolean;
+            element_type: number;
+            position: number;
+          }) => (
+            <Player
+              key={pick.element}
+              params={{
+                playerId: pick.element?.toString() ?? "",
+                captain: pick.is_captain,
+                element_type: pick.element_type,
+                position: pick.position,
+              }}
+            />
+          )
+        )}
       </div>
     </div>
   );
