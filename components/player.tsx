@@ -1,11 +1,13 @@
+import { teamBgClassMap } from "@/lib/teamBgClassMap";
 import { Pick } from "@/types/fpl";
 import { Card, CardContent } from "./ui/card";
 
 const Player = ({ player }: { player: Pick }) => {
   console.log(player);
+  const bgClass = teamBgClassMap[player.playerTeamData.name] || "bg-gray-300";
 
   return (
-    <Card className="w-30">
+    <Card className={`w-30 ${bgClass}`}>
       <CardContent>
         <p className="text-s">
           {/* {player.playerData.captain ? <HardHat size={20} /> : null} */}
