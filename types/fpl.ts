@@ -19,4 +19,5 @@ export type Pick = {
   playerData: FplBootstrapPlayer;
   playerPositionData: FplBootstrapPosition;
   playerTeamData: FplBootstrapTeam;
+  captain: boolean;
 };

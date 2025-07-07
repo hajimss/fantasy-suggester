@@ -20,7 +20,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const bsRes = await fetch(`${FPL_URL}/bootstrap-static/`);
   const bsData = await bsRes.json();
 
-  console.log("Fetched data:", bsData["teams"]);
+  console.log("Fetched data:", data);
   const picks = data.picks || [];
   const pickData: Pick[] = [];
 
@@ -41,6 +41,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       playerData: playerData!,
       playerPositionData: playerElementTypeData!,
       playerTeamData: playerTeamData!,
+      captain: pick.is_captain!,
     });
   }
 

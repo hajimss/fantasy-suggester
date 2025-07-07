@@ -1,5 +1,6 @@
 import { teamBgClassMap } from "@/lib/teamBgClassMap";
 import { Pick } from "@/types/fpl";
+import { HardHat } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
 const Player = ({ player }: { player: Pick }) => {
@@ -10,7 +11,7 @@ const Player = ({ player }: { player: Pick }) => {
     <Card className={`w-30 ${bgClass}`}>
       <CardContent>
         <p className="text-s">
-          {/* {player.playerData.captain ? <HardHat size={20} /> : null} */}
+          {player.captain ? <HardHat size={20} /> : null}
           {player ? player.playerData.web_name : "Unknown Player"}
         </p>
         <p className="text-xs italic">
