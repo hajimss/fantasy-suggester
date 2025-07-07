@@ -1,5 +1,6 @@
 import { FormationRow } from "@/components/formationRow";
 import Team from "@/components/team";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   FplBootstrapPlayer,
@@ -64,13 +65,21 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     <div className="flex flex-col gap-5">
       <Team params={{ teamId: id }} />
       <p>Your team:</p>
-      <div className="flex flex-col items-center gap-4 mt-8">
+      <div className="flex flex-col items-center gap-4">
         <FormationRow players={goalkeepers} />
         <FormationRow players={defenders} />
         <FormationRow players={midfielders} />
         <FormationRow players={forwards} />
         <Separator />
+      </div>
+
+      <p>Bench:</p>
+      <div className="flex flex-col items-center gap-4">
         <FormationRow players={benches} />
+      </div>
+      <Separator />
+      <div className="flex justify-center items-center">
+        <Button className="w-1/2">Suggest!</Button>
       </div>
     </div>
   );
