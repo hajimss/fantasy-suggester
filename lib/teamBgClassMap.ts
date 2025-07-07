@@ -16,7 +16,7 @@ export const teamBgClassMap: Record<string, string> = {
   "Man City": "bg-sky-400",
   "Man United": "bg-red-700",
   "Newcastle": "bg-black-600",
-  "Nottingham Forest": "bg-red-600",
+  "Nott'm Forest": "bg-red-600",
   "Southampton": "bg-red-500",
   "Sunderland": "bg-red-600",
   "Tottenham": "bg-neutral-200",
