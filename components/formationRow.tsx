@@ -4,7 +4,7 @@ import Player from "./player";
 export const FormationRow = ({ players }: { players: Pick[] }) => {
   console.log(players);
   return (
-    <div className="flex justify-center gap-2">
+    <div className="flex justify-center gap-2 w-full">
       {players.map((player) => (
         <Player key={player.playerData.id} player={player} />
       ))}

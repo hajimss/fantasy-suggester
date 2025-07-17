@@ -1,14 +1,14 @@
 export const teamBgClassMap: Record<string, string> = {
   "Arsenal": "bg-red-400",
   "Aston Villa": "bg-purple-400",
-  "Bournemouth": "bg-red-400",
+  "Bournemouth": "bg-red-500",
   "Brentford": "bg-red-300",
   "Brighton": "bg-blue-400",
   "Burnley": "bg-rose-400",
-  "Chelsea": "bg-blue-400",
+  "Chelsea": "bg-blue-500",
   "Crystal Palace": "bg-blue-400",
   "Everton": "bg-blue-400",
-  "Fulham": "bg-gray-400",
+  "Fulham": "bg-gray-300",
   "Ipswich": "bg-blue-400",
   "Leeds": "bg-yellow-200",
   "Leicester": "bg-blue-300",
@@ -22,4 +22,30 @@ export const teamBgClassMap: Record<string, string> = {
   "Tottenham": "bg-neutral-200",
   "West Ham": "bg-pink-700",
   "Wolves": "bg-yellow-500"
+};
+
+export const temaBorderClassMap: Record<string, string> = {
+  "Arsenal": "border-gray-100",
+  "Aston Villa": "border-yellow-400",
+  "Bournemouth": "border-black",
+  "Brentford": "border-white-200",
+  "Brighton": "border-white-200",
+  "Burnley": "border-white-200",
+  "Chelsea": "border-white-200",
+  "Crystal Palace": "border-red-500",
+  "Everton": "border-white-200",
+  "Fulham": "border-black",
+  "Ipswich": "border-white-200",
+  "Leeds": "border-white-200",
+  "Leicester": "border-white-200",
+  "Liverpool": "border-white-200",
+  "Man City": "border-white-200",
+  "Man United": "border-white-200",
+  "Newcastle": "border-black",
+  "Nott'm Forest": "border-white-200",
+  "Southampton": "border-white-200",
+  "Sunderland": "border-white-200",
+  "Tottenham": "border-white-200",
+  "West Ham": "border-white-200",
+  "Wolves": "border-gray-600"
 };

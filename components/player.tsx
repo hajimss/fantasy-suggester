@@ -1,25 +1,25 @@
-import { teamBgClassMap } from "@/lib/teamBgClassMap";
+import { teamBgClassMap, temaBorderClassMap } from "@/lib/teamBgClassMap";
 import { Pick } from "@/types/fpl";
-import { HardHat } from "lucide-react";
-import { Card, CardContent } from "./ui/card";
 
 const Player = ({ player }: { player: Pick }) => {
   console.log(player);
   const bgClass = teamBgClassMap[player.playerTeamData.name] || "bg-gray-300";
+  const borderClass =
+    temaBorderClassMap[player.playerTeamData.name] || "bg-gray-200";
 
   return (
-    <Card className={`w-30 ${bgClass}`}>
-      <CardContent>
-        <p className="text-s">
-          {player.captain ? <HardHat size={20} /> : null}
+    <div
+      className={`w-1/5 text-[0.6rem] rounded-sm ${bgClass} ${borderClass} border-2 text-pretty`}
+    >
+      <div className="p-2">
+        <p className="font-semibold">
           {player ? player.playerData.web_name : "Unknown Player"}
+          {player.captain ? "(C)" : null}
         </p>
-        <p className="text-xs italic">
-          {player.playerPositionData.singular_name_short}
-        </p>
-        <p className="text-xs italic">{player.playerTeamData.name}</p>
-      </CardContent>
-    </Card>
+        <p></p>
+        <p className="italic">{player.playerTeamData.name}</p>
+      </div>
+    </div>
   );
 };
 
