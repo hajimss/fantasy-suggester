@@ -9,15 +9,19 @@ const Player = ({ player }: { player: Pick }) => {
 
   return (
     <div
-      className={`w-1/5 text-[0.6rem] rounded-sm ${bgClass} ${borderClass} border-2 text-pretty`}
+      className={`w-1/5 text-[0.6rem] rounded-sm ${bgClass} ${borderClass} border-2 text-wrap`}
     >
       <div className="p-2">
         <p className="font-semibold">
           {player ? player.playerData.web_name : "Unknown Player"}
-          {player.captain ? "(C)" : null}
+          {player.captain ? " (C)" : null}
         </p>
         <p></p>
-        <p className="italic">{player.playerTeamData.name}</p>
+        <p className="italic">
+          {player.playerTeamData.name == "Bournemouth"
+            ? "B'mouth"
+            : player.playerTeamData.name}
+        </p>
       </div>
     </div>
   );
