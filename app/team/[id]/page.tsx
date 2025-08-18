@@ -1,6 +1,6 @@
 import { FormationRow } from "@/components/formationRow";
+import SuggestBox from "@/components/suggestBox";
 import Team from "@/components/team";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   FplBootstrapPlayer,
@@ -14,6 +14,12 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const FPL_URL = process.env.FPL_URL;
   let currentGW = 0;
 
+  // Fetch team details here
+  const teamRes = await fetch(`${FPL_URL}/entry/${id}/`);
+  const teamData = await teamRes.json();
+  console.log("Fetched team data:", teamData);
+
+  // Fetch the bootstrap data to get player, position, and team details
   const bsRes = await fetch(`${FPL_URL}/bootstrap-static/`);
   const bsData = await bsRes.json();
 
@@ -25,11 +31,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     }
   }
 
-  // fetch the picks for the team
+  // Fetch the picks for the team
   const res = await fetch(`${FPL_URL}/entry/${id}/event/${currentGW}/picks/`);
   const data = await res.json();
 
-  console.log("Fetched data:", data);
+  // console.log("Fetched data:", data);
   const picks = data.picks || [];
   const pickData: Pick[] = [];
 
@@ -73,7 +79,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <Team params={{ teamId: id }} />
+      <Team teamData={teamData} />
       <p>Your team:</p>
       <div className="flex flex-col items-center gap-4">
         <FormationRow players={goalkeepers} />
@@ -89,7 +95,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
       <Separator />
       <div className="flex justify-center items-center">
-        <Button className="w-1/2">Suggest!</Button>
+        <SuggestBox
+          players={pickData}
+          moneyBank={teamData.last_deadline_bank}
+        />
       </div>
     </div>
   );
