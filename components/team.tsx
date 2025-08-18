@@ -9,7 +9,11 @@ const Team = ({ teamData }: { teamData: any }) => {
           {teamData["player_first_name"]} {teamData["player_last_name"]}
         </p>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>
+        <p className="text-s">
+          Overall Rank: {teamData["summary_overall_rank"]}
+        </p>
+      </CardContent>
     </Card>
   );
 };
