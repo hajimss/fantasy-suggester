@@ -1,6 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
-const Team = ({ teamData }: { teamData: any }) => {
+interface TeamData {
+  name: string;
+  player_first_name: string;
+  player_last_name: string;
+  summary_overall_rank: number | string;
+}
+
+const Team = ({ teamData }: { teamData: TeamData }) => {
   return (
     <Card>
       <CardHeader>
