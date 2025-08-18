@@ -12,13 +12,22 @@ import {
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const FPL_URL = process.env.FPL_URL;
-  const GW = 38; // TODO: Replace with dynamic logic
-
-  const res = await fetch(`${FPL_URL}/entry/${id}/event/${GW}/picks/`);
-  const data = await res.json();
+  let currentGW = 0;
 
   const bsRes = await fetch(`${FPL_URL}/bootstrap-static/`);
   const bsData = await bsRes.json();
+
+  // Find the current gameweek
+  for (const event of bsData["events"]) {
+    if (event.is_current) {
+      currentGW = event.id;
+      break;
+    }
+  }
+
+  // fetch the picks for the team
+  const res = await fetch(`${FPL_URL}/entry/${id}/event/${currentGW}/picks/`);
+  const data = await res.json();
 
   console.log("Fetched data:", data);
   const picks = data.picks || [];
