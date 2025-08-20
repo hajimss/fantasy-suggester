@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
   }
 const { messages } = await req.json();
   const completion = await client.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: "gpt-5",
     messages,
   });
 
