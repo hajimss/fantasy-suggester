@@ -21,3 +21,24 @@ export type Pick = {
   playerTeamData: FplBootstrapTeam;
   captain: boolean;
 };
+
+export type SuggestionJson = {
+  "Suggested Transfers": {
+    Player: string;
+    Team: string;
+    Reason: string;
+  }[];
+  "Final Decision": {
+    Transfer: string;
+    Out: string;
+    Reason: string;
+  }[];
+  "Suggested Lineup": {
+    Goalkeeper: string;
+    Defenders: string[];
+    Midfielders: string[];
+    Forwards: string[];
+    Bench: string[];
+  };
+  "Final Thoughts": string;
+};
