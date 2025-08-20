@@ -19,6 +19,7 @@ const SuggestBox = ({
   moneyBank: number;
 }) => {
   const [suggestion, setSuggestion] = useState<SuggestionJson | null>(null);
+  const [loading, setLoading] = useState(false);
   console.log("SuggestBox player:", players[0], players.length);
 
   let playerListPrompt = "";
@@ -33,6 +34,7 @@ const SuggestBox = ({
   }
 
   const handleSuggest = async () => {
+    setLoading(true); // Start loading
     // Example prompt/messages for the API
     const messages = [
       {
@@ -119,6 +121,7 @@ Below is an example of the json format you should stick to:
       if (res.status === 429) {
         alert("Daily limit reached. Please try again tomorrow.");
       }
+      setLoading(false);
       return;
     }
 
@@ -128,14 +131,22 @@ Below is an example of the json format you should stick to:
     }
 
     setSuggestion(JSON.parse(data.content));
+    setLoading(false); // Stop loading
   };
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <Button onClick={handleSuggest} className="w-1/2">
-        Suggest!
-      </Button>
-      <div>
+      <div className="flex flex-col justify-center items-center gap-2 w-full">
+        <Button onClick={handleSuggest} className="w-1/2" disabled={loading}>
+          {loading ? "Loading..." : "Suggest!"}
+        </Button>
+        {loading && (
+          <p className="text-sm m-2 italic text-center">
+            Generating suggestions... This process may take up to 2 minutes.
+          </p>
+        )}
+      </div>
+      <div className="flex flex-col w-full">
         <p className="text-sm m-2">
           <b>Budget</b>: {formatMoney(moneyBank)}
         </p>
@@ -145,7 +156,7 @@ Below is an example of the json format you should stick to:
               <p className="text-sm m-2">
                 <b>Suggestions:</b>
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-2 justify-center">
                 {suggestion["Suggested Transfers"].map((player) => {
                   return (
                     <Card className="w-1/3" key={player.Player}>
