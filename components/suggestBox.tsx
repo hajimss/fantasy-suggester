@@ -1,7 +1,7 @@
 "use client";
 
 import { Pick, SuggestionJson } from "@/types/fpl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
@@ -20,7 +20,20 @@ const SuggestBox = ({
 }) => {
   const [suggestion, setSuggestion] = useState<SuggestionJson | null>(null);
   const [loading, setLoading] = useState(false);
+  const [suggestionsLeft, setSuggestionsLeft] = useState<number | null>(null);
   console.log("SuggestBox player:", players[0], players.length);
+
+  const fetchUsage = async () => {
+    const res = await fetch("/api/usage");
+    if (res.ok) {
+      const data = await res.json();
+      setSuggestionsLeft(data.suggestionsLeft);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsage();
+  }, []);
 
   let playerListPrompt = "";
 
@@ -129,16 +142,34 @@ Below is an example of the json format you should stick to:
     if (!data?.content) {
       return;
     }
-
+    console.log("Suggestion response:", data.content);
     setSuggestion(JSON.parse(data.content));
     setLoading(false); // Stop loading
+
+    // Re-fetch usage after suggestion
+    fetchUsage();
   };
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
+      <div className="mb-2">
+        {suggestionsLeft !== null && (
+          <span className="text-sm text-gray-700">
+            Suggestions left today: <b>{suggestionsLeft}</b>
+          </span>
+        )}
+      </div>
       <div className="flex flex-col justify-center items-center gap-2 w-full">
-        <Button onClick={handleSuggest} className="w-1/2" disabled={loading}>
-          {loading ? "Loading..." : "Suggest!"}
+        <Button
+          onClick={handleSuggest}
+          className="w-1/2"
+          disabled={loading || suggestionsLeft === 0}
+        >
+          {loading
+            ? "Loading..."
+            : suggestionsLeft == 0
+            ? "No suggestions left"
+            : "Suggest!"}
         </Button>
         {loading && (
           <p className="text-sm m-2 italic text-center">
