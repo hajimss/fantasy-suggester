@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
@@ -27,8 +28,8 @@ export default function Home() {
     event.preventDefault();
     console.log("Team ID submitted:", teamId);
 
-    if (!teamId) {
-      alert("Please enter a valid team ID.");
+    if (!teamId || isNaN(Number(teamId))) {
+      alert("Please enter a valid numeric team ID.");
       return;
     }
 
@@ -51,6 +52,9 @@ export default function Home() {
           placeholder="Fantasy team ID"
           className="w-3/4"
         />
+        <Button type="submit" className="mt-2 w-1/3" disabled={!teamId}>
+          Submit
+        </Button>
       </form>
     </div>
   );
