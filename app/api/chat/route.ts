@@ -8,6 +8,7 @@ const client = new OpenAI({
 });
 
 const DAILY_LIMIT = 2;
+const MODEL = process.env.OPENAI_API_MODEL;
 
 export async function POST(req: NextRequest) {
   const { userId } = await auth(); // Clerk user ID
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
   }
 const { messages } = await req.json();
   const completion = await client.chat.completions.create({
-    model: process.env.OPENAI_API_MODEL!, // to point to the specific model between production and development using the environment variable
+    model: MODEL!,
     messages,
   });
 
