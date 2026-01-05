@@ -5,6 +5,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
+  baseURL: "https://api.deepseek.com", // Custom base URL for Deepseek
 });
 
 const DAILY_LIMIT = 2;
